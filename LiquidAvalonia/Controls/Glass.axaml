@@ -6,11 +6,6 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         
-        <!-- <Setter Property="Effect"> -->
-        <!--     <DropShadowEffect -->
-        <!--         /> -->
-        <!-- </Setter> -->
-        
         <Setter Property="Template">
             <ControlTemplate>
                 <Panel>
@@ -18,7 +13,7 @@
                                       TintColor="{TemplateBinding TintColor}"
                                       TintOpacity="{TemplateBinding TintOpacity}"
                                       Smoothness="{TemplateBinding Smoothness}"
-                                      RefractionThreshold="{TemplateBinding RefractionThreshold}"/>
+                                      Depth="{TemplateBinding Depth}"/>
                     
                     <ContentPresenter x:Name="PART_ContentPresenter"
                                       Content="{TemplateBinding Content}"

@@ -84,22 +84,22 @@ internal class GlassImpl : Control
     }
     
     /// <summary>
-    /// Defines the <see cref="RefractionThreshold"/> property.
+    /// Defines the <see cref="Depth"/> property.
     /// </summary>
-    public static readonly StyledProperty<double> RefractionThresholdProperty =
-        AvaloniaProperty.Register<GlassImpl, double>(nameof(RefractionThreshold), defaultValue: .4);
+    public static readonly StyledProperty<double> DepthProperty =
+        AvaloniaProperty.Register<GlassImpl, double>(nameof(Depth), defaultValue: .6);
     
     /// <summary>
-    /// Threshold for refraction.
-    /// Higher value means less refraction on edges.
+    /// Depth of refraction.
+    /// Higher value means more refraction.
     /// </summary>
     /// <remarks>
-    /// Default value is 0.4.
+    /// Default value is 0.6.
     /// </remarks>
-    public double RefractionThreshold
+    public double Depth
     {
-        get => GetValue(RefractionThresholdProperty);
-        set => SetValue(RefractionThresholdProperty, value);
+        get => GetValue(DepthProperty);
+        set => SetValue(DepthProperty, value);
     }
     
     private readonly SKRuntimeEffect _shapeEffect;
@@ -114,7 +114,7 @@ internal class GlassImpl : Control
             """
             uniform float2 u_resolution;
             uniform float u_smoothness;
-            uniform float u_threshold;
+            uniform float u_depth;
             
             
             
@@ -140,7 +140,7 @@ internal class GlassImpl : Control
                 float2 st = fragCoord / u_resolution;
                 float2 point = float2(.5);
             
-                float shape = 1. - smoothstep(.0, 1., pow(pow(abs((st.x - point.x) / size), u_smoothness) + pow(abs((st.y - point.y) / size), u_smoothness), u_threshold));
+                float shape = 1. - smoothstep(.0, 1., pow(pow(abs((st.x - point.x) / size), u_smoothness) + pow(abs((st.y - point.y) / size), u_smoothness), u_depth));
             	
               	// r - refraction intensity.
               	// g - tint area.
@@ -188,7 +188,7 @@ internal class GlassImpl : Control
             TintColorProperty,
             TintOpacityProperty,
             SmoothnessProperty,
-            RefractionThresholdProperty);
+            DepthProperty);
     }
 
     public override void Render(DrawingContext context)
@@ -203,7 +203,7 @@ internal class GlassImpl : Control
             TintColor,
             TintOpacity,
             Smoothness,
-            RefractionThreshold));
+            Depth));
     }
 
     private class GlassDrawOperation(
@@ -286,7 +286,7 @@ internal class GlassImpl : Control
             {
                 ["u_resolution"] = new[] { width, height },
                 ["u_smoothness"] = new[] { (float)(1 - _smoothness) * 10 },
-                ["u_threshold"]  = new[] { (float)_refractionThreshold * 10 },
+                ["u_depth"]  = new[] { (float)(1 - _refractionThreshold) * 10 },
             };
             
             using var shapeShader = _shapeEffect.ToShader(true, shapeUniforms);

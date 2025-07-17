@@ -134,7 +134,7 @@
                             Width="200"
                             Height="200"
                             Smoothness="0.6"
-                            RefractionThreshold="0.3">
+                            Depth="0.7">
                             
                             <liquid:Glass.Styles>
                                 <Style Selector="liquid|Glass">
@@ -171,7 +171,7 @@
                             Height="200"
                             TintColor="Azure"
                             Smoothness="0.6"
-                            RefractionThreshold="0.3">
+                            Depth="0.7">
                             
                             <liquid:Glass.Styles>
                                 <Style Selector="liquid|Glass">
@@ -199,7 +199,7 @@
                             Width="200"
                             Height="200"
                             TintColor="Azure"
-                            RefractionThreshold="0.3">
+                            Depth="0.7">
                             
                             <liquid:Glass.Styles>
                                 <Style Selector="liquid|Glass">
@@ -240,11 +240,11 @@
                                             PlaybackDirection="Alternate">
                                             
                                             <KeyFrame Cue="0%">
-                                                <Setter Property="RefractionThreshold" Value="0.05"/>
+                                                <Setter Property="Depth" Value="0.05"/>
                                             </KeyFrame>
                                             
                                             <KeyFrame Cue="100%">
-                                                <Setter Property="RefractionThreshold" Value="1"/>
+                                                <Setter Property="Depth" Value="1"/>
                                             </KeyFrame>
                                         </Animation>
                                     </Style.Animations>

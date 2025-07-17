@@ -72,22 +72,22 @@ public class Glass : ContentControl
     }
     
     /// <summary>
-    /// Defines the <see cref="RefractionThreshold"/> property.
+    /// Defines the <see cref="Depth"/> property.
     /// </summary>
-    public static readonly StyledProperty<double> RefractionThresholdProperty =
-        AvaloniaProperty.Register<GlassImpl, double>(nameof(RefractionThreshold), defaultValue: .4);
+    public static readonly StyledProperty<double> DepthProperty =
+        AvaloniaProperty.Register<GlassImpl, double>(nameof(Depth), defaultValue: .6);
     
     /// <summary>
-    /// Threshold for refraction.
-    /// Higher value means less refraction on edges.
+    /// Depth of refraction.
+    /// Higher value means more refraction.
     /// </summary>
     /// <remarks>
-    /// Default value is 0.4.
+    /// Default value is 0.6.
     /// </remarks>
-    public double RefractionThreshold
+    public double Depth
     {
-        get => GetValue(RefractionThresholdProperty);
-        set => SetValue(RefractionThresholdProperty, value);
+        get => GetValue(DepthProperty);
+        set => SetValue(DepthProperty, value);
     }
 
     public Glass()
