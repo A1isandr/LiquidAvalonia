@@ -36,6 +36,9 @@ internal class GlassImpl : Control
     /// <summary>
     /// Color of tint.
     /// </summary>
+    /// <remarks>
+    /// Default value is white.
+    /// </remarks>
     public Color TintColor
     {
         get => GetValue(TintColorProperty);
@@ -49,8 +52,11 @@ internal class GlassImpl : Control
         AvaloniaProperty.Register<GlassImpl, double>(nameof(TintOpacity), defaultValue: .5);
     
     /// <summary>
-    /// Tint opacity.
+    /// Opacity of tint.
     /// </summary>
+    /// <remarks>
+    /// Default value is 0.5.
+    /// </remarks>
     public double TintOpacity
     {
         get => GetValue(TintOpacityProperty);
@@ -58,14 +64,19 @@ internal class GlassImpl : Control
     }
     
     /// <summary>
-    /// 
+    /// Defines the <see cref="Smoothness"/> property.
     /// </summary>
     public static readonly StyledProperty<double> SmoothnessProperty =
-        AvaloniaProperty.Register<GlassImpl, double>(nameof(Smoothness), defaultValue: .4);
+        AvaloniaProperty.Register<GlassImpl, double>(nameof(Smoothness), defaultValue: .6);
     
     /// <summary>
-    /// 
+    /// Smoothness of glass shape.
     /// </summary>
+    /// <remarks>
+    /// Default value is 0.6.
+    /// <br/>
+    /// Use 0.8 for circular shape.
+    /// </remarks>
     public double Smoothness
     {
         get => GetValue(SmoothnessProperty);
@@ -73,14 +84,18 @@ internal class GlassImpl : Control
     }
     
     /// <summary>
-    /// 
+    /// Defines the <see cref="RefractionThreshold"/> property.
     /// </summary>
     public static readonly StyledProperty<double> RefractionThresholdProperty =
         AvaloniaProperty.Register<GlassImpl, double>(nameof(RefractionThreshold), defaultValue: .4);
     
     /// <summary>
-    /// 
+    /// Threshold for refraction.
+    /// Higher value means less refraction on edges.
     /// </summary>
+    /// <remarks>
+    /// Default value is 0.4.
+    /// </remarks>
     public double RefractionThreshold
     {
         get => GetValue(RefractionThresholdProperty);
@@ -92,6 +107,9 @@ internal class GlassImpl : Control
     
     public GlassImpl()
     {
+        // Shader for calculating shape of glass.
+        // It uses superellipse equation to calculate shape and refraction.
+        // Result is stored as color, where r - refraction intensity, g - tint area.
         const string shapeShaderCode =
             """
             uniform float2 u_resolution;
@@ -130,6 +148,8 @@ internal class GlassImpl : Control
             }
             """;
         
+        // Shader for drawing glass.
+        // It uses shape shader output to calculate refraction and tint color.
         const string glassShaderCode =
             """
             uniform shader u_shape;
@@ -265,7 +285,7 @@ internal class GlassImpl : Control
             var shapeUniforms = new SKRuntimeEffectUniforms(_shapeEffect)
             {
                 ["u_resolution"] = new[] { width, height },
-                ["u_smoothness"] = new[] { (float)_smoothness * 10 },
+                ["u_smoothness"] = new[] { (float)(1 - _smoothness) * 10 },
                 ["u_threshold"]  = new[] { (float)_refractionThreshold * 10 },
             };
             
@@ -309,4 +329,3 @@ internal class GlassImpl : Control
         }
     }
 }
-

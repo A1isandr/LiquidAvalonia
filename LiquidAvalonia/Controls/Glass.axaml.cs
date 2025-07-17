@@ -43,7 +43,7 @@ public class Glass : ContentControl
         AvaloniaProperty.Register<GlassImpl, double>(nameof(TintOpacity), defaultValue: .5);
     
     /// <summary>
-    /// Tint opacity.
+    /// Opacity of tint.
     /// </summary>
     public double TintOpacity
     {
@@ -52,14 +52,19 @@ public class Glass : ContentControl
     }
     
     /// <summary>
-    /// 
+    /// Defines the <see cref="Smoothness"/> property.
     /// </summary>
     public static readonly StyledProperty<double> SmoothnessProperty =
         AvaloniaProperty.Register<GlassImpl, double>(nameof(Smoothness), defaultValue: .4);
     
     /// <summary>
-    /// 
+    /// Smoothness of glass shape.
     /// </summary>
+    /// <remarks>
+    /// Default value is 0.6.
+    /// <br/>
+    /// Use 0.8 for circular shape.
+    /// </remarks>
     public double Smoothness
     {
         get => GetValue(SmoothnessProperty);
@@ -67,14 +72,18 @@ public class Glass : ContentControl
     }
     
     /// <summary>
-    /// 
+    /// Defines the <see cref="RefractionThreshold"/> property.
     /// </summary>
     public static readonly StyledProperty<double> RefractionThresholdProperty =
         AvaloniaProperty.Register<GlassImpl, double>(nameof(RefractionThreshold), defaultValue: .4);
     
     /// <summary>
-    /// 
+    /// Threshold for refraction.
+    /// Higher value means less refraction on edges.
     /// </summary>
+    /// <remarks>
+    /// Default value is 0.4.
+    /// </remarks>
     public double RefractionThreshold
     {
         get => GetValue(RefractionThresholdProperty);
