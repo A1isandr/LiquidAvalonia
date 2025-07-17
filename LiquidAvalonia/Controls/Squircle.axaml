@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:liquid="https://github.com/A1isandr/LiquidAvalonia">
+    
+    <ControlTheme x:Key="{x:Type liquid:Squircle}" TargetType="liquid:Squircle">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <liquid:SquircleImpl x:Name="PART_SquircleImpl"
+                                         CornerRadius="{TemplateBinding CornerRadius}"
+                                         CornerSmoothing="{TemplateBinding CornerSmoothing}"
+                                         PreserveSmoothing="{TemplateBinding PreserveSmoothing}"
+                                         BorderThickness="{TemplateBinding BorderThickness}"
+                                         BorderBrush="{TemplateBinding BorderBrush}"
+                                         Background="{TemplateBinding Background}"/>
+                    
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}">
+                        
+                        <ContentPresenter.OpacityMask>
+                            <VisualBrush Visual="{Binding #PART_SquircleImpl}"/>
+                        </ContentPresenter.OpacityMask>
+                    </ContentPresenter>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

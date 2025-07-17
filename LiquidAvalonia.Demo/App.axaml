@@ -1,0 +1,15 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:liquid="https://github.com/A1isandr/LiquidAvalonia"
+             x:Class="LiquidAvalonia.Demo.App"
+             xmlns:local="using:LiquidAvalonia.Demo"
+             RequestedThemeVariant="Default">
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <liquid:LiquidAvaloniaTheme/>
+    </Application.Styles>
+</Application>

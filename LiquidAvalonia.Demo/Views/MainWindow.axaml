@@ -1,0 +1,195 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LiquidAvalonia.Demo.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:liquid="https://github.com/A1isandr/LiquidAvalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="LiquidAvalonia.Demo.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="LiquidAvalonia.Demo"
+        Width="800"
+        Height="600">
+
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="FontSize" Value="100"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+    </Window.Styles>
+    
+    <Panel
+        Background="Azure">
+        
+        <Image
+            Source="C:\Users\alexa\OneDrive\Изображения\z0aqcnp8j1je1.png"/>
+        
+        <Canvas>
+            <!-- <liquid:Glass -->
+            <!--     Canvas.Left="20" -->
+            <!--     Canvas.Top="50" -->
+            <!--     Width="200" -->
+            <!--     Height="200" -->
+            <!--     TintColor="DarkBlue" -->
+            <!--     TintOpacity="0.2" -->
+            <!--     Smoothness="0.6" -->
+            <!--     ZIndex="5"/> -->
+            <!-- -->
+            <!-- <liquid:Glass -->
+            <!--     Canvas.Left="200" -->
+            <!--     Canvas.Top="50" -->
+            <!--     Width="200" -->
+            <!--     Height="200" -->
+            <!--     TintColor="DeepPink" -->
+            <!--     TintOpacity="0.3" -->
+            <!--     Smoothness="0.5" -->
+            <!--     ZIndex="4"/> -->
+            <!-- -->
+            <!-- <liquid:Glass -->
+            <!--     Canvas.Left="360" -->
+            <!--     Canvas.Top="50" -->
+            <!--     Width="200" -->
+            <!--     Height="200" -->
+            <!--     TintColor="GreenYellow" -->
+            <!--     TintOpacity="0.4" -->
+            <!--     Smoothness="0.4" -->
+            <!--     ZIndex="3"/> -->
+            <!-- -->
+            <!-- <liquid:Glass -->
+            <!--     Canvas.Left="500" -->
+            <!--     Canvas.Top="50" -->
+            <!--     Width="200" -->
+            <!--     Height="200" -->
+            <!--     TintColor="DarkOrange" -->
+            <!--     TintOpacity="0.5" -->
+            <!--     Smoothness="0.3" -->
+            <!--     ZIndex="2"/> -->
+            <!-- -->
+            <!-- <liquid:Glass -->
+            <!--     Canvas.Left="620" -->
+            <!--     Canvas.Top="50" -->
+            <!--     Width="200" -->
+            <!--     Height="200" -->
+            <!--     TintColor="DeepSkyBlue" -->
+            <!--     TintOpacity="0.6" -->
+            <!--     Smoothness="0.2" -->
+            <!--     ZIndex="1"/> -->
+            
+            <liquid:Glass
+                Canvas.Left="20"
+                Canvas.Top="50"
+                Width="200"
+                Height="200"
+                TintColor="DarkBlue"
+                TintOpacity="0.2"
+                Smoothness="0.6"
+                ZIndex="1">
+                
+                <TextBlock
+                    Text="A"/>
+            </liquid:Glass>
+            
+            <liquid:Glass
+                Canvas.Left="170"
+                Canvas.Top="150"
+                Width="200"
+                Height="200"
+                TintColor="DeepPink"
+                TintOpacity="0.7"
+                Smoothness="0.5"
+                ZIndex="0">
+                
+                <TextBlock
+                    Text="V"/>
+            </liquid:Glass>
+            
+            <liquid:Glass
+                Canvas.Left="320"
+                Canvas.Top="50"
+                Width="200"
+                Height="200"
+                TintColor="GreenYellow"
+                TintOpacity="0.35"
+                Smoothness="0.2"
+                ZIndex="1">
+                
+                <TextBlock
+                    Text="A"/>    
+            </liquid:Glass>
+            
+            <liquid:Glass
+                Canvas.Left="470"
+                Canvas.Top="150"
+                Width="200"
+                Height="200"
+                TintColor="DarkOrange"
+                TintOpacity="0.5"
+                Smoothness="0.35"
+                ZIndex="0">
+                
+                <TextBlock
+                    Text="L"/>
+            </liquid:Glass>
+            
+            <liquid:Glass
+                Canvas.Left="620"
+                Canvas.Top="50"
+                Width="200"
+                Height="200"
+                TintColor="Black"
+                TintOpacity="0.4"
+                Smoothness="0.2"
+                ZIndex="1">
+                
+                <TextBlock
+                    Text="O"/>
+            </liquid:Glass>
+            
+            <liquid:Glass
+                Canvas.Left="770"
+                Canvas.Top="150"
+                Width="200"
+                Height="200"
+                TintColor="Azure"
+                TintOpacity="0.6"
+                Smoothness="0.2"
+                ZIndex="0">
+                
+                <TextBlock
+                    Text="N"/>
+            </liquid:Glass>
+            
+            <liquid:Glass
+                Canvas.Left="920"
+                Canvas.Top="50"
+                Width="200"
+                Height="200"
+                TintColor="Crimson"
+                TintOpacity="0.45"
+                Smoothness="0.3"
+                ZIndex="1">
+                
+                <TextBlock
+                    Text="I"/>
+            </liquid:Glass>
+            
+            <liquid:Glass
+                Canvas.Left="1070"
+                Canvas.Top="150"
+                Width="200"
+                Height="200"
+                TintColor="DarkGreen"
+                TintOpacity="0.9"
+                Smoothness="0.4"
+                ZIndex="0">
+                
+                <TextBlock
+                    Text="A"/>
+            </liquid:Glass>
+        </Canvas>
+    </Panel>
+</Window>

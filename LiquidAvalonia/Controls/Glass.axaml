@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:liquid="using:LiquidAvalonia.Controls">
+    
+    <ControlTheme x:Key="{x:Type liquid:Glass}" TargetType="liquid:Glass">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        
+        <!-- <Setter Property="Effect"> -->
+        <!--     <DropShadowEffect -->
+        <!--         /> -->
+        <!-- </Setter> -->
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <liquid:GlassImpl x:Name="PART_GlassImpl"
+                                      TintColor="{TemplateBinding TintColor}"
+                                      TintOpacity="{TemplateBinding TintOpacity}"
+                                      Smoothness="{TemplateBinding Smoothness}"
+                                      RefractionThreshold="{TemplateBinding RefractionThreshold}"/>
+                    
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"/>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>
