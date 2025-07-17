@@ -379,7 +379,7 @@ internal class SquircleImpl : Control
             using var lease = leaseFeature.Lease();
             var canvas = lease.SkCanvas;
             
-            //canvas.ClipPath(SKPath.ParseSvgPathData(_squirclePath), SKClipOperation.Intersect, true);
+            canvas.ClipPath(SKPath.ParseSvgPathData(_squirclePath), SKClipOperation.Intersect, true);
         }
     }
 }

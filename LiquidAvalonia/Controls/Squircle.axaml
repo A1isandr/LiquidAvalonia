@@ -22,12 +22,7 @@
                                       ContentTemplate="{TemplateBinding ContentTemplate}"
                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      Margin="{TemplateBinding Padding}">
-                        
-                        <ContentPresenter.OpacityMask>
-                            <VisualBrush Visual="{Binding #PART_SquircleImpl}"/>
-                        </ContentPresenter.OpacityMask>
-                    </ContentPresenter>
+                                      Margin="{TemplateBinding Padding}"/>
                 </Panel>
             </ControlTemplate>
         </Setter>
