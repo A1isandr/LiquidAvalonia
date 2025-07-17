@@ -90,6 +90,11 @@ public class Glass : ContentControl
         set => SetValue(RefractionThresholdProperty, value);
     }
 
+    public Glass()
+    {
+        DrawShadow(TintOpacity);
+    }
+    
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
