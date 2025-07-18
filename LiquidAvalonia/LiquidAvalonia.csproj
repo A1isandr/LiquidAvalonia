@@ -2,11 +2,32 @@
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFrameworks>netstandard2.1;net9.0</TargetFrameworks>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <Title>LiquidAvalonia</Title>
+        <Authors>AlPi</Authors>
+        <Description>Liquid Glass in Avalonia.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/A1isandr/LiquidAvalonia</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/A1isandr/LiquidAvalonia</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>avalonia;avaloniaui;ui;controls;theme;glass;glassmorphism</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <EnablePackageValidation>True</EnablePackageValidation>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.3.2" />
         <PackageReference Include="Avalonia.Skia" Version="11.3.2" />
