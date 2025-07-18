@@ -47,7 +47,6 @@ Then reference it in application's App.axaml file:
 </div>
 
 ## Known Issues
-- Glass: At the moment, "frost" effect is not presented;
 - Glass: Refracted image has some aliasing;
 - Glass: RotationTransform may not work properly;
 - Glass: other rendering issues may occur.
