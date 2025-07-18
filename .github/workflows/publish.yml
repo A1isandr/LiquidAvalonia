@@ -1,0 +1,29 @@
+﻿# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: publish
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  NuGetDirectory: ${{ github.workspace}}/nuget
+  ProjectPath: ./LiquidAvalonia/LiquidAvalonia.csproj
+
+jobs:
+  create_nuget:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set VERSION variable from tag
+        run: echo "VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')" >> $GITHUB_ENV
+      - name: Build
+        run: dotnet build --configuration Release /p:Version=${VERSION}
+      - name: Pack
+        run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output ${{ env.NuGetDirectory }} ${{ env.ProjectPath }}
+      - name: Push
+        run: dotnet nuget push NuGet.Workflow.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
