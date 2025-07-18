@@ -1,10 +1,10 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia.Styling;
+﻿using Avalonia.Styling;
 
 namespace LiquidAvalonia.Themes;
 
+/// <summary>
+/// LiquidAvalonia theme.
+/// </summary>
 public class LiquidAvaloniaTheme : Styles
 {
     

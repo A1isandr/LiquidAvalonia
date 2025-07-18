@@ -4,6 +4,9 @@ using Avalonia.Media;
 
 namespace LiquidAvalonia.Controls;
 
+/// <summary>
+/// Glass control.
+/// </summary>
 public class Glass : ContentControl
 {
     /// <summary>
@@ -90,11 +93,15 @@ public class Glass : ContentControl
         set => SetValue(DepthProperty, value);
     }
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
     public Glass()
     {
         DrawShadow(TintOpacity);
     }
     
+    /// <inheritdoc/>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
