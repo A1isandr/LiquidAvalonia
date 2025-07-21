@@ -169,9 +169,12 @@ internal class GlassImpl : Control
                 float4 shape_info = sample(u_shape, fragCoord);
               	float4 color = shape_info.r > 0.0
               	    ? sample(u_background, fragCoord * shape_info.r)
-              	    : float4(0., 0., 0., 0.);
+              	    : float4(0.);
+              	float4 tint = shape_info.g * u_tint;
+              	float tint_opacity = clamp(shape_info.g, .0, u_tint_opacity);
+              	float antialias = smoothstep(0., .2, sin(shape_info.r));
               
-                return mix(color, shape_info.g * u_tint, clamp(shape_info.g, .0, u_tint_opacity)) * smoothstep(0., .2, sin(shape_info.r));
+                return mix(color, tint, tint_opacity) * antialias;
             }
             """;
         
