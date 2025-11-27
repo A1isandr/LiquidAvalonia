@@ -1,13 +1,24 @@
-using Avalonia.Media;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.ReactiveUI;
-using LiquidAvalonia.Controls;
 using LiquidAvalonia.Demo.ViewModels;
 
 namespace LiquidAvalonia.Demo.Views;
 
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
-    private bool _isPointerPressed;
+    private bool IsDragging { get; set; }
+    
+    private Point DragOrigin { get; set; }
+    
+    private Point Start { get; set; }
+
+    private double X { get; set; }
+
+    private double Y { get; set; }
+    
+    
     
     public MainWindow()
     {
@@ -15,35 +26,56 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 
         ViewModel = new MainWindowViewModel();
         
-        GlassPanel.PointerPressed += (sender, e) =>
-        {
-            if (sender is not Glass _) return;
+        X = Canvas.GetLeft(GlassPanel);
+        Y = Canvas.GetTop(GlassPanel);
         
-            //e.Pointer.Capture(Glass);
-            _isPointerPressed = true;
+        GlassPanel.PointerPressed += (_, e) =>
+        {
+            if (!e.Properties.IsLeftButtonPressed) return;
+        
+            IsDragging = true;
+            DragOrigin = e.GetPosition(GlassCanvas);
+            Start      = new Point(X, Y);
+            
+            e.Pointer.Capture(GlassPanel);
+            GlassPanel.Cursor = new Cursor(StandardCursorType.SizeAll);
         };
         
-        GlassPanel.PointerReleased += (sender, e) =>
+        GlassPanel.PointerMoved += (_, e) =>
         {
-            if (sender is not Glass _) return;
+            if (!IsDragging) return;
+        
+            var point        = e.GetPosition(GlassCanvas);
+            var deltaX = point.X - DragOrigin.X;
+            var deltaY = point.Y - DragOrigin.Y;
             
-            //e.Pointer.Capture(null);
-            _isPointerPressed = false;
+            X = Start.X + deltaX;
+            Y = Start.Y + deltaY;
+            
+            Canvas.SetLeft(GlassPanel, X);
+            Canvas.SetTop(GlassPanel, Y);
         };
         
-        PointerMoved += (sender, e) =>
+        GlassPanel.PointerReleased += (_, e) =>
         {
-            if (!_isPointerPressed) return;
-            
-            var mousePosWindow = e.GetPosition(SquirclePanel);
-            var glassPanelPosition = GlassPanel.Bounds.Position;
-            
-            var offsetX = mousePosWindow.X - glassPanelPosition.X;
-            var offsetY = mousePosWindow.Y - glassPanelPosition.Y;
-            
-            GlassPanel.RenderTransform = new TranslateTransform(
-                offsetX,
-                offsetY);
+            EndDrag(e.Pointer);
         };
+        
+        GlassPanel.PointerCaptureLost += (_, e) =>
+        {
+            EndDrag(e.Pointer);
+        };
+    }
+    
+    
+    
+    private void EndDrag(IPointer pointer)
+    {
+        if (!IsDragging) return;
+            
+        IsDragging = false;
+            
+        pointer.Capture(null);
+        GlassPanel.Cursor = new Cursor(StandardCursorType.Hand);
     }
 }

@@ -255,17 +255,23 @@
                 </liquid:Squircle>
                 
                 <liquid:Squircle x:Name="SquirclePanel">
-                    <Panel>
+                    <Canvas x:Name="GlassCanvas">
                         <Image
-                            Source="avares://LiquidAvalonia.Demo/Assets/avalonia-logo.ico"
-                            RenderTransform="scale(0.8)"/>
+                            Width="{Binding $parent.Bounds.Width}"
+                            Height="{Binding $parent.Bounds.Height}"
+                            Source="avares://LiquidAvalonia.Demo/Assets/background.jpg"
+                            Stretch="UniformToFill"/>
                         
                         <liquid:Glass x:Name="GlassPanel"
+                                      Canvas.Left="500"
+                                      Canvas.Top="250"
                                       Width="200"
                                       Height="200"
+                                      TintOpacity="0.1"
                                       TintColor="Azure"
+                                      Depth="0.8"
                                       Cursor="Hand"/>
-                    </Panel>
+                    </Canvas>
                 </liquid:Squircle>
             </StackPanel>
         </ScrollViewer>
