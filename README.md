@@ -2,6 +2,8 @@
   <h1>LiquidAvalonia</h1>
 </div>
 
+[![NuGet Version](https://img.shields.io/nuget/v/LiquidAvalonia?logo=nuget&color=blue)](https://www.nuget.org/packages/LiquidAvalonia/)
+
 An attempt at replicating Apple's **Liquid Glass** design in [Avalonia](https://avaloniaui.net). This is still **Work In Progress**, so there is some issues.
 
 The library comes with several new controls:
@@ -47,7 +49,6 @@ Then reference it in application's App.axaml file:
 </div>
 
 ## Known Issues
-- Glass: At the moment, "frost" effect is not presented;
 - Glass: Refracted image has some aliasing;
 - Glass: RotationTransform may not work properly;
 - Glass: other rendering issues may occur.
