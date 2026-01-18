@@ -3,8 +3,8 @@
                     xmlns:liquid="https://github.com/A1isandr/LiquidAvalonia">
     
     <ControlTheme x:Key="{x:Type liquid:Squircle}" TargetType="liquid:Squircle">
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         
         <Setter Property="Template">
             <ControlTemplate>
