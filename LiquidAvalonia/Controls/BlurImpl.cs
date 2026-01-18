@@ -37,7 +37,7 @@ internal class BlurImpl : ContentControl
         AvaloniaProperty.Register<GlassImpl, Color>(nameof(TintColor), defaultValue: Colors.Transparent);
 
     /// <summary>
-    /// Color of tint.
+    /// Tint's color.
     /// </summary>
     public Color TintColor
     {
@@ -52,12 +52,28 @@ internal class BlurImpl : ContentControl
         AvaloniaProperty.Register<GlassImpl, double>(nameof(TintOpacity), defaultValue: 0.5);
     
     /// <summary>
-    /// Opacity of tint.
+    /// Tint's opacity.
     /// </summary>
     public double TintOpacity
     {
         get => GetValue(TintOpacityProperty);
         set => SetValue(TintOpacityProperty, value);
+    }
+    
+    /// <summary>
+    /// Defines the <see cref="TintBlendMode"/> property.
+    /// </summary>
+    public static readonly StyledProperty<BlendMode> TintBlendModeProperty =
+        AvaloniaProperty.Register<BlurImpl, BlendMode>(nameof(TintBlendMode), defaultValue: BlendMode.Screen);
+
+    /// <summary>
+    /// Tint's blend mode.
+    /// </summary>
+    /// <remarks>Default value is Screen.</remarks>
+    public BlendMode TintBlendMode
+    {
+        get => GetValue(TintBlendModeProperty);
+        set => SetValue(TintBlendModeProperty, value);
     }
 
 
@@ -67,7 +83,8 @@ internal class BlurImpl : ContentControl
         AffectsRender<BlurImpl>(
             BlurRadiusProperty,
             TintColorProperty,
-            TintOpacityProperty);
+            TintOpacityProperty,
+            TintBlendModeProperty);
     }
 
    
@@ -79,7 +96,8 @@ internal class BlurImpl : ContentControl
             Bounds,
             BlurRadius,
             TintColor,
-            TintOpacity)));
+            TintOpacity,
+            TintBlendMode)));
         
         base.Render(context);
     }
@@ -153,11 +171,11 @@ internal class BlurImpl : ContentControl
                 tileMode: SKShaderTileMode.Clamp);
 
             using var blurPaint = new SKPaint();
-            blurPaint.Shader = backgroundShader;
+            blurPaint.Shader      = backgroundShader;
             blurPaint.ImageFilter = blurFilter;
             blurPaint.ColorFilter = SKColorFilter.CreateBlendMode(
                 c:    GetEffectiveTintColor(_args.TintColor, _args.TintOpacity).ToSKColor(),
-                mode: SKBlendMode.Screen);
+                mode: BlendModeToSKBlendMode(_args.TintBlendMode));
             
             canvas.DrawRect(0, 0, width, height, blurPaint);
         }
@@ -165,19 +183,40 @@ internal class BlurImpl : ContentControl
         /// <summary>
         /// Apply opacity to tint color.
         /// </summary>
-        /// <param name="tintColor"></param>
-        /// <param name="tintOpacity"></param>
-        /// <returns></returns>
+        /// <param name="tintColor">Tint's color.</param>
+        /// <param name="tintOpacity">Tint's opacity.</param>
+        /// <returns>Effective tint color.</returns>
         private static Color GetEffectiveTintColor(Color tintColor, double tintOpacity) =>
             new((byte)(tintColor.A * tintOpacity), tintColor.R, tintColor.G, tintColor.B);
+
+        /// <summary>
+        /// Convert BlendMode to SKBlendMode.
+        /// </summary>
+        /// <param name="blendMode">Tint's blend mode.</param>
+        /// <returns>Skia blend mode.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Unknown blend mode.</exception>
+        // ReSharper disable once InconsistentNaming
+        private static SKBlendMode BlendModeToSKBlendMode(BlendMode blendMode)
+        {
+            return blendMode switch
+            {
+                BlendMode.Screen => SKBlendMode.Screen,
+                BlendMode.Color => SKBlendMode.Color,
+                BlendMode.Overlay => SKBlendMode.Overlay,
+                BlendMode.Hue => SKBlendMode.Hue,
+                BlendMode.Saturation => SKBlendMode.Saturation,
+                _ => throw new ArgumentOutOfRangeException(nameof(blendMode), blendMode, null)
+            };
+        }
     }
 }
 
 
 
 internal record BlurDrawOperationArgs(
-    BlurImpl Blur,
-    Rect     BlurBounds,
-    double   BlurRadius,
-    Color    TintColor,
-    double   TintOpacity);
+    BlurImpl  Blur,
+    Rect      BlurBounds,
+    double    BlurRadius,
+    Color     TintColor,
+    double    TintOpacity,
+    BlendMode TintBlendMode);

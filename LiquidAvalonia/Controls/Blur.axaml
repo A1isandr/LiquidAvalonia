@@ -11,6 +11,7 @@
                                      BlurRadius="{TemplateBinding BlurRadius}"
                                      TintColor="{TemplateBinding TintColor}"
                                      TintOpacity="{TemplateBinding TintOpacity}"
+                                     TintBlendMode="{TemplateBinding TintBlendMode}"
                                      BorderThickness="{TemplateBinding BorderThickness}"
                                      BorderBrush="{TemplateBinding BorderBrush}"
                                      Background="{TemplateBinding Background}"/>
