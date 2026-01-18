@@ -13,7 +13,8 @@
                                       TintColor="{TemplateBinding TintColor}"
                                       TintOpacity="{TemplateBinding TintOpacity}"
                                       Smoothness="{TemplateBinding Smoothness}"
-                                      Depth="{TemplateBinding Depth}"/>
+                                      Depth="{TemplateBinding Depth}"
+                                      BlurRadius="{TemplateBinding BlurRadius}"/>
                     
                     <ContentPresenter x:Name="PART_ContentPresenter"
                                       Content="{TemplateBinding Content}"
