@@ -8,11 +8,11 @@
                 <Panel>
                     <liquid:BlurImpl x:Name="PART_BlurImpl"
                                      CornerRadius="{TemplateBinding CornerRadius}"
-                                     CornerSmoothing="{TemplateBinding CornerSmoothing}"
-                                     PreserveSmoothing="{TemplateBinding PreserveSmoothing}"
                                      BlurRadius="{TemplateBinding BlurRadius}"
                                      TintColor="{TemplateBinding TintColor}"
                                      TintOpacity="{TemplateBinding TintOpacity}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
                                      Background="{TemplateBinding Background}"/>
                     
                     <ContentPresenter x:Name="PART_ContentPresenter"

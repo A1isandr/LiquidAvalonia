@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
@@ -9,7 +10,7 @@ using SkiaSharp;
 
 namespace LiquidAvalonia.Controls;
 
-internal class BlurImpl : SquircleImpl
+internal class BlurImpl : ContentControl
 {
     /// <summary>
     /// Defines the <see cref="BlurRadius"/> property.
@@ -59,6 +60,8 @@ internal class BlurImpl : SquircleImpl
         set => SetValue(TintOpacityProperty, value);
     }
 
+
+
     static BlurImpl()
     {
         AffectsRender<BlurImpl>(
@@ -67,44 +70,36 @@ internal class BlurImpl : SquircleImpl
             TintOpacityProperty);
     }
 
+   
+
     public override void Render(DrawingContext context)
     {
-        base.Render(context);
-        
-        context.Custom(new BlurDrawOperation(
+        context.Custom(new BlurDrawOperation(new BlurDrawOperationArgs(
             this,
             Bounds,
             BlurRadius,
             TintColor,
-            TintOpacity));
+            TintOpacity)));
+        
+        base.Render(context);
     }
-    
-    private class BlurDrawOperation(
-        BlurImpl blur,
-        Rect controlBounds,
-        double blurRadius,
-        Color tintColor,
-        double tintOpacity)
-        : ICustomDrawOperation
+
+   
+   
+    private class BlurDrawOperation(BlurDrawOperationArgs args) : ICustomDrawOperation
     {
-        private readonly BlurImpl _blur = blur;
-        private readonly Rect _controlBounds = controlBounds;
-        private readonly double _blurRadius = blurRadius;
-        private readonly Color _tintColor = tintColor;
-        private readonly double _tintOpacity = tintOpacity;
+        private readonly BlurDrawOperationArgs _args = args;
         
         private bool _disposed;
-
-        public Rect Bounds => _controlBounds;
         
+        public Rect Bounds => _args.BlurBounds;
+
+
+
         public bool Equals(ICustomDrawOperation? other)
         {
             return other is BlurDrawOperation operation &&
-                   operation._blur == _blur &&
-                   operation._controlBounds == _controlBounds &&
-                   Math.Abs(operation._blurRadius - _blurRadius) < double.Epsilon &&
-                   operation._tintColor == _tintColor &&
-                   Math.Abs(operation._tintOpacity - _tintOpacity) < double.Epsilon;
+                   _args.Equals(operation._args);
         }
     
         public void Dispose()
@@ -115,7 +110,7 @@ internal class BlurImpl : SquircleImpl
             _disposed = true;
         }
         
-        public bool HitTest(Point p) => _controlBounds.Contains(p);
+        public bool HitTest(Point p) => _args.BlurBounds.Contains(p);
         
         public void Render(ImmediateDrawingContext context)
         {
@@ -127,15 +122,18 @@ internal class BlurImpl : SquircleImpl
             
             if (!canvas.TotalMatrix.TryInvert(out var invertedTransform)) return;
             
+            var width  = (float)_args.BlurBounds.Width;
+            var height = (float)_args.BlurBounds.Height;
+            
             // Preventing artifacts.
             if (canvas.GetLocalClipBounds(out var bounds) && 
                 !bounds.Contains(SKRect.Create(
                     bounds.Left,
                     bounds.Top,
-                    (float)_controlBounds.Width,
-                    (float)_controlBounds.Height)))
+                    width,
+                    height)))
             {
-                Dispatcher.UIThread.Post(() => _blur.InvalidateVisual());
+                Dispatcher.UIThread.Post(() => _args.Blur.InvalidateVisual());
             }
             
             // Take background snapshot. 
@@ -150,22 +148,22 @@ internal class BlurImpl : SquircleImpl
             
             // Create blur.
             using var blurFilter = SKImageFilter.CreateBlur(
-                sigmaX:   (float)_blurRadius,
-                sigmaY:   (float)_blurRadius,
+                sigmaX:   (float)_args.BlurRadius,
+                sigmaY:   (float)_args.BlurRadius,
                 tileMode: SKShaderTileMode.Clamp);
 
             using var blurPaint = new SKPaint();
             blurPaint.Shader = backgroundShader;
             blurPaint.ImageFilter = blurFilter;
             blurPaint.ColorFilter = SKColorFilter.CreateBlendMode(
-                c:    GetEffectiveTintColor(_tintColor, _tintOpacity).ToSKColor(),
+                c:    GetEffectiveTintColor(_args.TintColor, _args.TintOpacity).ToSKColor(),
                 mode: SKBlendMode.Screen);
             
-            canvas.DrawRect(0, 0, (float)_controlBounds.Width, (float)_controlBounds.Height, blurPaint);
+            canvas.DrawRect(0, 0, width, height, blurPaint);
         }
         
         /// <summary>
-        /// Get tint color with opacity.
+        /// Apply opacity to tint color.
         /// </summary>
         /// <param name="tintColor"></param>
         /// <param name="tintOpacity"></param>
@@ -174,3 +172,12 @@ internal class BlurImpl : SquircleImpl
             new((byte)(tintColor.A * tintOpacity), tintColor.R, tintColor.G, tintColor.B);
     }
 }
+
+
+
+internal record BlurDrawOperationArgs(
+    BlurImpl Blur,
+    Rect     BlurBounds,
+    double   BlurRadius,
+    Color    TintColor,
+    double   TintOpacity);
