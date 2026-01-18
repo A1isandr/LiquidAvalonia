@@ -147,17 +147,16 @@ internal class SquircleImpl : Control
         AvaloniaProperty.RegisterDirect<SquircleImpl, string?>(nameof(SquirclePath),
             o => o.SquirclePath,
             (o, v) => o.SquirclePath = v);
-    
-    private string? _squirclePath;
+
     /// <summary>
     /// Path data of the squircle.
     /// </summary>
     protected string? SquirclePath
     {
-        get => _squirclePath;
-        set => SetAndRaise(SquirclePathProperty, ref _squirclePath, value);
+        get;
+        set => SetAndRaise(SquirclePathProperty, ref field, value);
     }
-    
+
     static SquircleImpl()
     {
         AffectsRender<SquircleImpl>(
