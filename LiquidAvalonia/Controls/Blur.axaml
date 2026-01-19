@@ -24,13 +24,18 @@
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Margin="{TemplateBinding Padding}"/>
                         
-                        <Border
+                        <Border x:Name="GlossBorder"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderBrush="{TemplateBinding BorderBrush}"/>
                     </Panel>
                 </Border>
             </ControlTemplate>
         </Setter>
+        
+        <Style Selector="^.Gloss /template/ Border#GlossBorder">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BoxShadow" Value="inset 1 1 5 rgba(255, 255, 255, 128)"/>
+        </Style>
     </ControlTheme>
 </ResourceDictionary>
