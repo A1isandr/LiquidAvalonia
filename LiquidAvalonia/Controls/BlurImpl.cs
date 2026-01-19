@@ -10,7 +10,7 @@ using SkiaSharp;
 
 namespace LiquidAvalonia.Controls;
 
-internal class BlurImpl : ContentControl
+internal class BlurImpl : Control
 {
     /// <summary>
     /// Defines the <see cref="BlurRadius"/> property.
@@ -200,12 +200,12 @@ internal class BlurImpl : ContentControl
         {
             return blendMode switch
             {
-                BlendMode.Screen => SKBlendMode.Screen,
-                BlendMode.Color => SKBlendMode.Color,
-                BlendMode.Overlay => SKBlendMode.Overlay,
-                BlendMode.Hue => SKBlendMode.Hue,
+                BlendMode.Screen     => SKBlendMode.Screen,
+                BlendMode.Color      => SKBlendMode.Color,
+                BlendMode.Overlay    => SKBlendMode.Overlay,
+                BlendMode.Hue        => SKBlendMode.Hue,
                 BlendMode.Saturation => SKBlendMode.Saturation,
-                _ => throw new ArgumentOutOfRangeException(nameof(blendMode), blendMode, null)
+                _                    => throw new ArgumentOutOfRangeException(nameof(blendMode), blendMode, null)
             };
         }
     }

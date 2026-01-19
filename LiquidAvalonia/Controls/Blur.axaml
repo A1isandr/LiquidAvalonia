@@ -5,24 +5,31 @@
     <ControlTheme x:Key="{x:Type liquid:Blur}" TargetType="liquid:Blur">
         <Setter Property="Template">
             <ControlTemplate>
-                <Panel>
-                    <liquid:BlurImpl x:Name="PART_BlurImpl"
-                                     CornerRadius="{TemplateBinding CornerRadius}"
-                                     BlurRadius="{TemplateBinding BlurRadius}"
-                                     TintColor="{TemplateBinding TintColor}"
-                                     TintOpacity="{TemplateBinding TintOpacity}"
-                                     TintBlendMode="{TemplateBinding TintBlendMode}"
-                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                     Background="{TemplateBinding Background}"/>
+                <Border
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    ClipToBounds="True">
                     
-                    <ContentPresenter x:Name="PART_ContentPresenter"
-                                      Content="{TemplateBinding Content}"
-                                      ContentTemplate="{TemplateBinding ContentTemplate}"
-                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      Margin="{TemplateBinding Padding}"/>
-                </Panel>
+                    <Panel>
+                        <liquid:BlurImpl x:Name="PART_BlurImpl"
+                                         BlurRadius="{TemplateBinding BlurRadius}"
+                                         TintColor="{TemplateBinding TintColor}"
+                                         TintOpacity="{TemplateBinding TintOpacity}"
+                                         TintBlendMode="{TemplateBinding TintBlendMode}"
+                                         Margin="{TemplateBinding BorderThickness}"/>
+                    
+                        <ContentPresenter x:Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"/>
+                        
+                        <Border
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                    </Panel>
+                </Border>
             </ControlTemplate>
         </Setter>
     </ControlTheme>

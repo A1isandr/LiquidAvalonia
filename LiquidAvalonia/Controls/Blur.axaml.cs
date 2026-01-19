@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Media;
 
@@ -8,7 +9,7 @@ namespace LiquidAvalonia.Controls;
 /// 
 /// </summary>
 [TemplatePart("PART_BlurImpl", typeof(BlurImpl))]
-public class Blur : Squircle
+public class Blur : ContentControl
 {
     /// <summary>
     /// Defines the <see cref="BlurRadius"/> property.
