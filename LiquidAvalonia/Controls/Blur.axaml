@@ -2,6 +2,36 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:liquid="https://github.com/A1isandr/LiquidAvalonia">
     
+    <Design.PreviewWith>
+        <Border>
+            <Panel>
+                <Image
+                    Width="500"
+                    Height="300"
+                    Source="D:\Projects\C#\LiquidAvalonia\LiquidAvalonia.Demo\Assets\background.jpg"
+                    Stretch="UniformToFill"/>
+                
+                <liquid:Blur Classes="Gloss"
+                    Width="200"
+                    Height="100"
+                    CornerRadius="50"
+                    BlurRadius="5"
+                    TintColor="Black"
+                    TintOpacity="0.7"
+                    TintBlendMode="Overlay">
+                    
+                    <TextBlock
+                        Text="Hello World"
+                        Foreground="White"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                </liquid:Blur>
+            </Panel>
+        </Border>
+    </Design.PreviewWith>
+    
+    
+    
     <ControlTheme x:Key="{x:Type liquid:Blur}" TargetType="liquid:Blur">
         <Setter Property="Template">
             <ControlTemplate>
@@ -25,17 +55,24 @@
                                           Margin="{TemplateBinding Padding}"/>
                         
                         <Border x:Name="GlossBorder"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"/>
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"/>
                     </Panel>
                 </Border>
             </ControlTemplate>
         </Setter>
         
         <Style Selector="^.Gloss /template/ Border#GlossBorder">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="BoxShadow" Value="inset 1 1 5 rgba(255, 255, 255, 128)"/>
+            <Setter Property="BoxShadow" Value="inset 0 0 10 -5 rgba(255, 255, 255, 0.4)"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush">
+                <LinearGradientBrush StartPoint="10% 0%" EndPoint="90% 100%">
+                    <GradientStop Color="rgba(255, 255, 255, 0.4)" Offset="0"/>
+                    <GradientStop Color="Transparent" Offset="0.5"/>
+                    <GradientStop Color="rgba(255, 255, 255, 0.4)" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter>
         </Style>
     </ControlTheme>
 </ResourceDictionary>
