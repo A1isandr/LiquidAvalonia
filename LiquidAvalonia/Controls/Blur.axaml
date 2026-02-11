@@ -64,15 +64,7 @@
         </Setter>
         
         <Style Selector="^.Gloss /template/ Border#GlossBorder">
-            <Setter Property="BoxShadow" Value="inset 0 0 5 rgba(255, 255, 255, 0.4)"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush">
-                <LinearGradientBrush StartPoint="10% 0%" EndPoint="90% 100%">
-                    <GradientStop Color="rgba(255, 255, 255, 0.4)" Offset="0"/>
-                    <GradientStop Color="Transparent" Offset="0.5"/>
-                    <GradientStop Color="rgba(255, 255, 255, 0.4)" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter>
+            <Setter Property="BoxShadow" Value="inset 1 1 rgba(255, 255, 255, 0.4), inset -1 -1 rgba(255, 255, 255, 0.4)"/>
         </Style>
     </ControlTheme>
 </ResourceDictionary>
