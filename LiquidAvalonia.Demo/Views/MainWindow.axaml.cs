@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using LiquidAvalonia.Demo.ViewModels;
 
 namespace LiquidAvalonia.Demo.Views;
