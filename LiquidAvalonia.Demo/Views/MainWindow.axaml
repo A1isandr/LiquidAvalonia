@@ -3,277 +3,48 @@
         xmlns:vm="using:LiquidAvalonia.Demo.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:liquid="https://github.com/A1isandr/LiquidAvalonia"
+        xmlns:views="clr-namespace:LiquidAvalonia.Demo.Views"
+        xmlns:liquid="clr-namespace:LiquidAvalonia.Controls;assembly=LiquidAvalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LiquidAvalonia.Demo.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="LiquidAvalonia.Demo"
         Width="1150"
-        Height="600">
+        Height="700"
+        WindowStartupLocation="CenterScreen">
 
-    <Window.Styles>
-        <Style Selector="liquid|Squircle">
-            <Setter Property="Width" Value="1000"/>
-            <Setter Property="Height" Value="500"/>
-            <Setter Property="CornerRadius" Value="60"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Background" Value="#121212"/>
-        </Style>
-    </Window.Styles>
-    
-    <Panel
-        Background="Azure">
-        
-        <ScrollViewer
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Auto">
+    <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="20"
+        Margin="20">
+
+        <liquid:Squircle
+            Grid.Column="0"
+            CornerRadius="30">
+
+            <Panel>
+                <Image
+                    Source="avares://LiquidAvalonia.Demo/Assets/background.jpg"
+                    Stretch="UniformToFill"/>
+
+                <Canvas x:Name="GlassCanvas">
+                    <liquid:Glass x:Name="LiquidGlass"
+                                  Canvas.Left="100"
+                                  Canvas.Top="100"
+                                  Width="200"
+                                  Height="200"/>
+                    
+                </Canvas>
+            </Panel>
+        </liquid:Squircle>
+
+        <liquid:Squircle
+            Grid.Column="1"
+            Width="300"
+            CornerRadius="30">
+
             
-            <StackPanel
-                Orientation="Vertical"
-                Spacing="50"
-                Margin="50">
-        
-                <liquid:Squircle>
-                    <Panel>
-                        <Rectangle
-                            Height="200"
-                            Fill="LightGray"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"/>
-            
-                        <liquid:Glass
-                            Width="200"
-                            Height="200"
-                            TintColor="Azure"
-                            TintOpacity="0.3"
-                            Smoothness="0.8"
-                            VerticalAlignment="Top">
-            
-                            <liquid:Glass.Styles>
-                                <Style Selector="liquid|Glass">
-                                    <Style.Animations>
-                                        <Animation
-                                            Duration="00:00:03"
-                                            IterationCount="Infinite"
-                                            PlaybackDirection="Alternate"
-                                            Easing="SineEaseInOut">
-                                            
-                                            <KeyFrame Cue="0%">
-                                                <Setter Property="Margin" Value="0, 50, 0, 0"/>
-                                            </KeyFrame>
-            
-                                            <KeyFrame Cue="100%">
-                                                <Setter Property="Margin" Value="0, 200, 0, 0"/>
-                                            </KeyFrame>
-                                        </Animation>
-                                    </Style.Animations>
-                                </Style>
-                            </liquid:Glass.Styles>
-                        </liquid:Glass>
-                    </Panel>
-                </liquid:Squircle>
-                
-                <liquid:Squircle>
-                    <Panel>
-                        <TextBlock
-                            Text="{Binding Text}"
-                            FontSize="40"
-                            FontWeight="Bold"
-                            TextWrapping="Wrap"
-                            TextAlignment="Justify"
-                            Padding="60, 0"/>
-                        
-                        <liquid:Glass
-                            Width="200"
-                            Height="200"
-                            TintColor="Azure"
-                            TintOpacity="0.3"
-                            Smoothness="0.8"
-                            HorizontalAlignment="Left">
-                            
-                            <liquid:Glass.Styles>
-                                <Style Selector="liquid|Glass">
-                                    <Style.Animations>
-                                        <Animation
-                                            Duration="00:00:05"
-                                            IterationCount="Infinite"
-                                            PlaybackDirection="Alternate"
-                                            Easing="SineEaseInOut">
-                                            
-                                            <KeyFrame Cue="0%">
-                                                <Setter Property="Margin" Value="50, 0, 0, 0"/>
-                                            </KeyFrame>
-                                            
-                                            <KeyFrame Cue="100%">
-                                                <Setter Property="Margin" Value="750, 0, 0, 0"/>
-                                            </KeyFrame>
-                                        </Animation>
-                                    </Style.Animations>
-                                </Style>
-                            </liquid:Glass.Styles>
-                        </liquid:Glass>
-                    </Panel>
-                </liquid:Squircle>
-                
-                <liquid:Squircle>
-                    <Grid
-                        ColumnDefinitions="*, *, *, *">
-                        
-                        <Rectangle
-                            Grid.Column="0"
-                            Grid.ColumnSpan="4"
-                            Height="250"
-                            Fill="LightGray"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"/>
-                        
-                        <liquid:Glass
-                            Grid.Column="0"
-                            Width="200"
-                            Height="200"
-                            Smoothness="0.6"
-                            Depth="0.7">
-                            
-                            <liquid:Glass.Styles>
-                                <Style Selector="liquid|Glass">
-                                    <Style.Animations>
-                                        <Animation
-                                            Duration="00:00:03"
-                                            IterationCount="Infinite"
-                                            PlaybackDirection="Alternate">
-                                            
-                                            <KeyFrame Cue="0%">
-                                                <Setter Property="TintColor" Value="Red"/>
-                                            </KeyFrame>
-                                            
-                                            <KeyFrame Cue="33%">
-                                                <Setter Property="TintColor" Value="Green"/>
-                                            </KeyFrame>
-                                            
-                                            <KeyFrame Cue="66%">
-                                                <Setter Property="TintColor" Value="Blue"/>
-                                            </KeyFrame>
-                                            
-                                            <KeyFrame Cue="100%">
-                                                <Setter Property="TintColor" Value="Red"/>
-                                            </KeyFrame>
-                                        </Animation>
-                                    </Style.Animations>
-                                </Style>
-                            </liquid:Glass.Styles>
-                        </liquid:Glass>
-                        
-                        <liquid:Glass
-                            Grid.Column="1"
-                            Width="200"
-                            Height="200"
-                            TintColor="Azure"
-                            Smoothness="0.6"
-                            Depth="0.7">
-                            
-                            <liquid:Glass.Styles>
-                                <Style Selector="liquid|Glass">
-                                    <Style.Animations>
-                                        <Animation
-                                            Duration="00:00:03"
-                                            IterationCount="Infinite"
-                                            PlaybackDirection="Alternate">
-                                            
-                                            <KeyFrame Cue="0%">
-                                                <Setter Property="TintOpacity" Value="0"/>
-                                            </KeyFrame>
-                                            
-                                            <KeyFrame Cue="100%">
-                                                <Setter Property="TintOpacity" Value="1"/>
-                                            </KeyFrame>
-                                        </Animation>
-                                    </Style.Animations>
-                                </Style>
-                            </liquid:Glass.Styles>
-                        </liquid:Glass>
-                        
-                        <liquid:Glass
-                            Grid.Column="2"
-                            Width="200"
-                            Height="200"
-                            TintColor="Azure"
-                            Depth="0.7">
-                            
-                            <liquid:Glass.Styles>
-                                <Style Selector="liquid|Glass">
-                                    <Style.Animations>
-                                        <Animation
-                                            Duration="00:00:03"
-                                            IterationCount="Infinite"
-                                            PlaybackDirection="Alternate"
-                                            Easing="SineEaseOut">
-                                            
-                                            <KeyFrame Cue="0%">
-                                                <Setter Property="Smoothness" Value="0"/>
-                                            </KeyFrame>
-                                            
-                                            <KeyFrame Cue="100%">
-                                                <Setter Property="Smoothness" Value="0.8"/>
-                                            </KeyFrame>
-                                        </Animation>
-                                    </Style.Animations>
-                                </Style>
-                            </liquid:Glass.Styles>
-                        </liquid:Glass>
-                        
-                        <liquid:Glass
-                            Grid.Column="3"
-                            Width="200"
-                            Height="200"
-                            TintColor="Azure"
-                            Smoothness="0.6">
-                            
-                            <liquid:Glass.Styles>
-                                <Style Selector="liquid|Glass">
-                                    <Style.Animations>
-                                        <Animation
-                                            Duration="00:00:03"
-                                            IterationCount="Infinite"
-                                            Easing="SineEaseOut"
-                                            PlaybackDirection="Alternate">
-                                            
-                                            <KeyFrame Cue="0%">
-                                                <Setter Property="Depth" Value="0.05"/>
-                                            </KeyFrame>
-                                            
-                                            <KeyFrame Cue="100%">
-                                                <Setter Property="Depth" Value="1"/>
-                                            </KeyFrame>
-                                        </Animation>
-                                    </Style.Animations>
-                                </Style>
-                            </liquid:Glass.Styles>
-                        </liquid:Glass>
-                    </Grid>
-                </liquid:Squircle>
-                
-                <liquid:Squircle x:Name="SquirclePanel">
-                    <Canvas x:Name="GlassCanvas">
-                        <Image
-                            Width="{Binding $parent.Bounds.Width}"
-                            Height="{Binding $parent.Bounds.Height}"
-                            Source="avares://LiquidAvalonia.Demo/Assets/background.jpg"
-                            Stretch="UniformToFill"/>
-                        
-                        <liquid:Glass x:Name="GlassPanel"
-                                      Canvas.Left="500"
-                                      Canvas.Top="250"
-                                      Width="200"
-                                      Height="200"
-                                      TintOpacity="0.1"
-                                      TintColor="Azure"
-                                      Depth="0.8"
-                                      Cursor="Hand"/>
-                    </Canvas>
-                </liquid:Squircle>
-            </StackPanel>
-        </ScrollViewer>
-    </Panel>
+        </liquid:Squircle>
+    </Grid>
 </Window>

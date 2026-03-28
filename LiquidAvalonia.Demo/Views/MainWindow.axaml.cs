@@ -9,73 +9,78 @@ namespace LiquidAvalonia.Demo.Views;
 public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     private bool IsDragging { get; set; }
-    
+
     private Point DragOrigin { get; set; }
-    
+
     private Point Start { get; set; }
 
     private double X { get; set; }
 
     private double Y { get; set; }
-    
-    
-    
+
+
+
     public MainWindow()
     {
         InitializeComponent();
 
         ViewModel = new MainWindowViewModel();
-        
-        X = Canvas.GetLeft(GlassPanel);
-        Y = Canvas.GetTop(GlassPanel);
-        
-        GlassPanel.PointerPressed += (_, e) =>
+
+        X = Canvas.GetLeft(LiquidGlass);
+        Y = Canvas.GetTop(LiquidGlass);
+
+
+
+        LiquidGlass.PointerPressed += (_, e) =>
         {
             if (!e.Properties.IsLeftButtonPressed) return;
-        
+
             IsDragging = true;
             DragOrigin = e.GetPosition(GlassCanvas);
             Start      = new Point(X, Y);
-            
-            e.Pointer.Capture(GlassPanel);
-            GlassPanel.Cursor = new Cursor(StandardCursorType.SizeAll);
+
+            e.Pointer.Capture(LiquidGlass);
+            LiquidGlass.Cursor = new Cursor(StandardCursorType.SizeAll);
         };
-        
-        GlassPanel.PointerMoved += (_, e) =>
+
+        LiquidGlass.PointerMoved += (_, e) =>
         {
-            if (!IsDragging) return;
-        
-            var point        = e.GetPosition(GlassCanvas);
-            var deltaX = point.X - DragOrigin.X;
-            var deltaY = point.Y - DragOrigin.Y;
-            
-            X = Start.X + deltaX;
-            Y = Start.Y + deltaY;
-            
-            Canvas.SetLeft(GlassPanel, X);
-            Canvas.SetTop(GlassPanel, Y);
+            if (IsDragging)
+            {
+                var point  = e.GetPosition(GlassCanvas);
+                var deltaX = point.X - DragOrigin.X;
+                var deltaY = point.Y - DragOrigin.Y;
+
+                X = Start.X + deltaX;
+                Y = Start.Y + deltaY;
+
+                Canvas.SetLeft(LiquidGlass, X);
+                Canvas.SetTop(LiquidGlass, Y);
+            }
+
         };
-        
-        GlassPanel.PointerReleased += (_, e) =>
+
+        LiquidGlass.PointerReleased += (_, e) =>
         {
             EndDrag(e.Pointer);
         };
-        
-        GlassPanel.PointerCaptureLost += (_, e) =>
+
+        LiquidGlass.PointerCaptureLost += (_, e) =>
         {
             EndDrag(e.Pointer);
         };
     }
-    
-    
-    
+
+
+
     private void EndDrag(IPointer pointer)
     {
         if (!IsDragging) return;
-            
+
         IsDragging = false;
-            
+
         pointer.Capture(null);
-        GlassPanel.Cursor = new Cursor(StandardCursorType.Hand);
+        LiquidGlass.Cursor = new Cursor(StandardCursorType.Hand);
     }
+
 }
